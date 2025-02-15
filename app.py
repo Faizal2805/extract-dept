@@ -7,48 +7,43 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all origins
 
 # Define department and year mappings
 department_keywords = {
-    "artificial intelligence and data science": "AI&DS",
-    "artificial intelligence and datascience": "AI&DS",
-    "aids": "AI&DS",
-    "Artificial Intelligence and Data Science": "AI&DS",
-    "Artificial Intelligence and Datascience": "AI&DS",
-    "AI DS": "AI&DS",
-    "ai ds": "AI&DS",
-    "AI&DS": "AI&DS",
-    "ai&ds": "AI&DS",
-    "Artificial Intelligence and DataScience": "AI&DS",
-    "computer science": "CSE",
-    "cs": "CSE",
-    "electronics and communication": "ECE",
-    "ece": "ECE"
+    r"\bartificial intelligence and data science\b": "AI&DS",
+    r"\bartificial intelligence and datascience\b": "AI&DS",
+    r"\baids\b": "AI&DS",
+    r"\bAI DS\b": "AI&DS",
+    r"\bai ds\b": "AI&DS",
+    r"\bAI&DS\b": "AI&DS",
+    r"\bai&ds\b": "AI&DS",
+    r"\bcomputer science\b": "CSE",
+    r"\bcs\b": "CSE",
+    r"\belectronics and communication\b": "ECE",
+    r"\bece\b": "ECE"
 }
 
 year_keywords = {
-    "first year": "I",
-    "second year": "II",
-    "Second year": "II",
-    "third year": "III",
-    "Third year": "III",
-    "fourth year": "IV",
-    "Fourth year": "IV",
-    "1st year": "I",
-    "2nd year": "II",
-    "3rd year": "III",
-    "4th year": "IV"
+    r"\bfirst year\b": "I",
+    r"\bsecond year\b": "II",
+    r"\bthird year\b": "III",
+    r"\bfourth year\b": "IV",
+    r"\b1st year\b": "I",
+    r"\b2nd year\b": "II",
+    r"\b3rd year\b": "III",
+    r"\b4th year\b": "IV"
 }
 
 # Function to extract Department and Year from text
 def extract_department_year(text):
+    text = text.strip().lower()
     extracted_department = None
     extracted_year = None
 
-    for key, value in department_keywords.items():
-        if key in text.lower():
+    for pattern, value in department_keywords.items():
+        if re.search(pattern, text):
             extracted_department = value
             break
 
-    for key, value in year_keywords.items():
-        if key in text.lower():
+    for pattern, value in year_keywords.items():
+        if re.search(pattern, text):
             extracted_year = value
             break
 
@@ -57,7 +52,7 @@ def extract_department_year(text):
 @app.route("/extract", methods=["POST"])
 def extract():
     data = request.get_json()
-    text = data.get("text", "")
+    text = data.get("text", "").strip()
     
     department, year = extract_department_year(text)
     
