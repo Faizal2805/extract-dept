@@ -3,15 +3,19 @@ import re
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend communication
+CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all origins
 
 # Define department and year mappings
 department_keywords = {
     "artificial intelligence and data science": "AI&DS",
+    "artificial intelligence and datascience": "AI&DS",
     "aids": "AI&DS",
     "Artificial Intelligence and Data Science": "AI&DS",
+    "Artificial Intelligence and Datascience": "AI&DS",
     "AI DS": "AI&DS",
+    "ai ds": "AI&DS",
     "AI&DS": "AI&DS",
+    "ai&ds": "AI&DS",
     "Artificial Intelligence and DataScience": "AI&DS",
     "computer science": "CSE",
     "cs": "CSE",
@@ -63,4 +67,4 @@ def extract():
         return jsonify({"error": "Department or Year not found in text"}), 400
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
