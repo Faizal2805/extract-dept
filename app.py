@@ -9,6 +9,10 @@ CORS(app)  # Enable CORS for frontend communication
 department_keywords = {
     "artificial intelligence and data science": "AI&DS",
     "aids": "AI&DS",
+    "Artificial Intelligence and Data Science": "AI&DS",
+    "AI DS": "AI&DS",
+    "AI&DS": "AI&DS",
+    "Artificial Intelligence and DataScience": "AI&DS",
     "computer science": "CSE",
     "cs": "CSE",
     "electronics and communication": "ECE",
@@ -18,8 +22,11 @@ department_keywords = {
 year_keywords = {
     "first year": "I",
     "second year": "II",
+    "Second year": "II"
     "third year": "III",
+    "Third year": "III",
     "fourth year": "IV",
+    "Fourth year": "IV",
     "1st year": "I",
     "2nd year": "II",
     "3rd year": "III",
