@@ -26,7 +26,7 @@ department_keywords = {
 year_keywords = {
     "first year": "I",
     "second year": "II",
-    "Second year": "II"
+    "Second year": "II",
     "third year": "III",
     "Third year": "III",
     "fourth year": "IV",
