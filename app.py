@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+efrom flask import Flask, request, jsonify
 import re
 from flask_cors import CORS
 
@@ -62,4 +62,5 @@ def extract():
         return jsonify({"error": "Department or Year not found in text"}), 400
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.getenv("PORT", 5000))  # Use Render’s default port 5000
+    app.run(host="0.0.0.0", port=port, debug=False)
